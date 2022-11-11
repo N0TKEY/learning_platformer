@@ -9,3 +9,9 @@
 position = Vector2( 54, 42 )
 
 [node name="Level_1" parent="." instance=ExtResource( 2 )]
+
+[node name="Label" type="Label" parent="."]
+margin_left = 343.0
+margin_top = -175.0
+margin_right = 383.0
+margin_bottom = -161.0
