@@ -1,4 +1,7 @@
 extends KinematicBody2D
+
+onready var playerMove = $".".global_position
+var playerMoveNew
 var speed = 120
 var jump = 3800
 var jumpLine = 0
@@ -11,6 +14,7 @@ var duble_jump = false
 onready var newLabel = get_parent().get_node("Label")
 
 func _physics_process(delta):
+	playerMoveNew = $".".global_position
 	newLabel.text = ""
 	if is_on_floor():
 		jumpLine = 0
@@ -23,6 +27,7 @@ func _physics_process(delta):
 		velocitySet()
 	
 	if fly:
+		
 		velocity.y = -1
 		if jumpLine >= jump and fly:
 			fly = false
@@ -50,7 +55,10 @@ func _physics_process(delta):
 	velocity = move_and_slide(velocity, FLOOR)
 	newLabel.text += "Floor: " + str(is_on_floor()) + "\n"
 	newLabel.text += "Fall: " + str(fall) + "\n"
+	newLabel.text += "Pos: " + str(playerMove) + "\n"
+	
 	animates_player(velocity)
+	playerMove = playerMoveNew
 
 
 func velocitySet():
@@ -64,7 +72,7 @@ func velocitySet():
 			$Sprite.flip_h = false
 	else:
 		velocity.x = 0
-	if Input.is_action_just_pressed("ui_up") and (is_on_floor() or !duble_jump or is_on_wall()):
+	if Input.is_action_just_pressed("ui_up") and (is_on_floor() or !duble_jump or is_on_wall()) and !(playerMove == playerMoveNew and jumpLine != 0):
 		fly = true
 		fall = false
 		jumpLine = 0
@@ -75,7 +83,7 @@ func velocitySet():
 
 func animates_player(direction: Vector2):
 	newLabel.text += "Fly: " + str(fly) + "\n"
-	if duble_jump and fly:
+	if duble_jump and fly and !(playerMove == playerMoveNew and jumpLine != 0):
 			$Sprite.play("D_Jump")
 	else:
 		if direction.x != 0:

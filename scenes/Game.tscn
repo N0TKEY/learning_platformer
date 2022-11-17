@@ -6,12 +6,12 @@
 [node name="Node2D" type="Node2D"]
 
 [node name="KinematicBody2D" parent="." instance=ExtResource( 1 )]
-position = Vector2( 54, 42 )
+position = Vector2( 55, 30 )
 
 [node name="Level_1" parent="." instance=ExtResource( 2 )]
 
 [node name="Label" type="Label" parent="."]
-margin_left = 343.0
-margin_top = -175.0
-margin_right = 383.0
-margin_bottom = -161.0
+margin_left = 304.0
+margin_top = -176.0
+margin_right = 344.0
+margin_bottom = -162.0
