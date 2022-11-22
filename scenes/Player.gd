@@ -41,13 +41,11 @@ func _physics_process(delta):
 	if is_on_wall() and fall:
 		velocity.y *= speed
 	else:
-		newLabel.text += str(jumpLine>jump*0.9 and fly) + "\n" + str(jumpLine<jump*0.1 and fall) + str(jumpLine) + "\n"
 		if (jumpLine>jump*0.9 and fly) or (jumpLine<jump*0.1 and fall):
 			velocity.y *= speed*1
 		else:
 			if fall:
 				velocity.y *= speed+int(gravitation*sqrt(jumpLine))
-				print(int(gravitation*sqrt(jumpLine)))
 			else:
 				velocity.y *= speed*2.5
 	jumpLine += abs(velocity.y)
@@ -56,6 +54,7 @@ func _physics_process(delta):
 	newLabel.text += "Floor: " + str(is_on_floor()) + "\n"
 	newLabel.text += "Fall: " + str(fall) + "\n"
 	newLabel.text += "Pos: " + str(playerMove) + "\n"
+	newLabel.text += "Wall: " + str(is_on_wall()) + "\n"
 	
 	animates_player(velocity)
 	playerMove = playerMoveNew
